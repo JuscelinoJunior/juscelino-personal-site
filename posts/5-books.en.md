@@ -1,0 +1,63 @@
+---
+title: "The 5 Essential Books for My Growth as a Programmer"
+excerpt: "A professional and personal list of books that have shaped my journey as a software developer"
+date: "2025-07-30"
+lang: "en"
+---
+
+As a programmer, I believe it’s important to look beyond the limited and often vague concept of “programming logic.” It’s essential to understand the foundations of computer science and related knowledge. Even though I’m not exactly an avid reader — reading is hard work for me — I’ve gone through many books, from deeply technical to highly conceptual.
+
+Whether for academic study or professional work, being exposed to knowledge that only a good book can truly convey is crucial — especially because I consider **curiosity** to be the most important trait of a software developer. In times of aggressive AI tool marketing, "vibe coding," and corporate stress, keeping that curiosity alive may be one of the greatest forms of resilience a developer can show.
+
+Below are the 5 books that have most sparked my curiosity as a programmer.
+
+---
+
+## 1. *Structure and Interpretation of Computer Programs*
+(Harold Abelson, Gerald Jay Sussman, Julie Sussman)  
+![img_2.png](/images/scip-book.png)
+
+This is actually what I’m currently reading — and even before finishing it, I’m already convinced it’s the best book for someone trying to understand what it really means to be a programmer. I wish I had read it seven years ago. It teaches the most fundamental concepts in programming without shortcuts and in a clear, accessible, and didactic language. More than that, it explores how those concepts connect with computer science as a whole.
+
+📖 PDF I’m reading: [sicp.sourceacademy.org/sicpjs.pdf](https://sicp.sourceacademy.org/sicpjs.pdf)  
+🎥 Great companion playlist: [YouTube](https://www.youtube.com/watch?v=oA-FdE3KV88&list=PLVFrD1dmDdvdvWFK8brOVNL7bKHpE-9w0&index=1)
+
+---
+
+## 2. *Mathematical Structures for Computer Science*
+(Judith Gersting)  
+![img_1.png](/images/judith-book.png)
+
+This was the first book I read when I started university — and among students, it was known as “Judith’s book.” Like most technical books, it’s not meant to be read cover to cover. It’s better used as a reference by topic. Still, it’s incredibly valuable for understanding discrete mathematics and how it relates to computer science.
+
+In my opinion, being exposed to this type of content is one of the most effective ways to prepare before diving into algorithms and data structures.
+
+---
+
+## 3. *Introduction to Algorithms*
+(Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, Clifford Stein)  
+![img.png](/images/algoritmos-teoria-e-pratica.png)
+
+I consider it the best resource for learning algorithms and data structures. While there are plenty of excellent videos on the subject on YouTube, this book dives much deeper, offering mathematical demonstrations and in-depth explanations that help shape a more prepared developer.
+
+It’s a dense and challenging read, so persistence is key. Like other technical books, it’s not meant to be read all at once — it’s best consumed as needed.
+
+---
+
+## 4. *Grokking Algorithms: An Illustrated Guide for Programmers and Other Curious People*
+(Aditya Y. Bhargava)  
+![img.png](/images/entendendo_algoritmos.png)
+
+This is a great companion to the Cormen book, but it’s much more straightforward and beginner-friendly. It’s perfect for those who want a quick introduction or refresher on algorithms and data structures, or for anyone looking to avoid heavy reading at first.
+
+---
+
+## 5. *Designing Data-Intensive Applications*
+(Martin Kleppmann)  
+![img.png](/images/data-intensive.png)
+
+This is probably my favorite resource for understanding how to work with data at scale. Among all the books on this list, it deals most directly with a modern and pressing topic: handling large volumes of data — a real challenge for developers, especially in commercial software.
+
+If you work in the corporate world — as most developers do — you’ll inevitably face applications that deal with massive amounts of data. And it’s common to see developers assume that throwing everything into a basic relational database will magically work. This book shows there’s much more to consider. While deep knowledge of databases, software architecture, and distributed systems is essential, this book broadens your perspective and encourages thoughtful, tailored solutions.
+
+---

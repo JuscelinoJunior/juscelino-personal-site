@@ -1,0 +1,11 @@
+body {
+  background-color: white;
+  color: black;
+  margin: 0; /* remove margens padrão */
+  min-height: 100vh;
+}
+
+html.dark body {
+  background-color: #111827; /* ou bg preto */
+  color: white;
+}
