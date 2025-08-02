@@ -11,6 +11,7 @@ import { DiMysql, DiOpensource, DiGoogleCloudPlatform } from "react-icons/di";
 import { IoLogoFirebase } from "react-icons/io5";
 import { SiDjango, SiFlask, SiPostgresql, SiAwslambda, SiRedis, SiFastapi, SiAerospike, SiApachekafka, SiApacheairflow } from "react-icons/si";
 import Head from 'next/head'
+import Link from 'next/link'
 
 type Post = {
     slug: string
@@ -35,7 +36,7 @@ type Experience = {
 
 import React from 'react'
 
-function PostList({ posts, onSelect, theme }: { posts: Post[]; onSelect: (post: Post) => void; theme: 'light' | 'dark' }) {
+function PostList({ posts, theme }: { posts: Post[]; theme: 'light' | 'dark' }) {
     const textColor = theme === 'light' ? '#4B5563' : '#A1A1AA' // gray-600 light / gray-400 dark
     const titleColor = theme === 'light' ? '#111827' : '#F3F4F6' // gray-900 light / gray-100 dark
 
@@ -53,11 +54,9 @@ function PostList({ posts, onSelect, theme }: { posts: Post[]; onSelect: (post: 
                         alignItems: 'center',
                         gap: '1rem',
                     }}
-                    onClick={() => onSelect(post)}
                     tabIndex={0}
-                    onKeyDown={(e) => {
-                        if (e.key === 'Enter') onSelect(post)
-                    }}
+                    role="button"
+                    aria-label={`Read post titled ${post.title}`}
                     onMouseEnter={(e) => {
                         (e.currentTarget as HTMLElement).style.backgroundColor =
                             theme === 'light' ? 'rgba(128, 128, 128, 0.1)' : 'rgba(128, 128, 128, 0.05)'
@@ -65,23 +64,21 @@ function PostList({ posts, onSelect, theme }: { posts: Post[]; onSelect: (post: 
                     onMouseLeave={(e) => {
                         (e.currentTarget as HTMLElement).style.backgroundColor = 'transparent'
                     }}
-                    role="button"
-                    aria-label={`Read post titled ${post.title}`}
                 >
-                    <div>
-                        <h3
-                            style={{
-                                fontSize: '1.1rem',
-                                fontWeight: 700,
-                                marginTop: 0,
-                                marginBottom: '0.25rem',
-                                color: titleColor,
-                            }}
-                        >
-                            {post.title}
-                        </h3>
-                        <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.875rem', margin: 0 }}>{post.excerpt}</p>
-                    </div>
+                    <Link href={`/${post.slug}`} style={{ color: titleColor, textDecoration: 'none', flex: 1 }}>
+                            <h3
+                                style={{
+                                    fontSize: '1.1rem',
+                                    fontWeight: 700,
+                                    marginTop: 0,
+                                    marginBottom: '0.25rem',
+                                    color: titleColor,
+                                }}
+                            >
+                                {post.title}
+                            </h3>
+                            <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.875rem', margin: 0 }}>{post.excerpt}</p>
+                    </Link>
                 </li>
             ))}
         </ul>
@@ -90,7 +87,6 @@ function PostList({ posts, onSelect, theme }: { posts: Post[]; onSelect: (post: 
 
 export default function Home({ posts, experiences }: { posts: Post[], experiences: Experience[] }) {
     const [lang, setLang] = useState<'pt' | 'en'>('pt')
-    const [activePost, setActivePost] = useState<Post | null>(null)
     const [selectedExperience, setSelectedExperience] = useState<ExperienceTranslation | null>(null)
     const [theme, setTheme] = useState<'light' | 'dark'>('light')
 
@@ -142,7 +138,6 @@ export default function Home({ posts, experiences }: { posts: Post[], experience
     const buttonBorder = theme === 'light' ? '#DC2626' : '#F87171' // red-600 / red-400
     const buttonText = theme === 'light' ? '#DC2626' : '#F87171'
     const buttonHoverBg = theme === 'light' ? '#DC2626' : '#F87171'
-    const postTextColor = theme === 'light' ? '#374151' : '#D1D5DB' // gray-700 / gray-300
 
     return (
         <>
@@ -412,47 +407,9 @@ export default function Home({ posts, experiences }: { posts: Post[], experience
                     >
                         Blog
                     </h2>
-                    {activePost ? (
-                        <article>
-                            <button
-                                onClick={() => setActivePost(null)}
-                                aria-label="Back to posts list"
-                                style={{
-                                    marginBottom: '2rem',
-                                    fontSize: '0.875rem',
-                                    color: buttonText,
-                                    background: 'none',
-                                    border: 'none',
-                                    cursor: 'pointer',
-                                    textDecoration: 'underline',
-                                    fontWeight: 600,
-                                }}
-                            >
-                                ← {lang === 'pt' ? 'Voltar' : 'Back'}
-                            </button>
-                            <h3
-                                style={{
-                                    fontSize: '1.75rem',
-                                    fontWeight: 700,
-                                    marginBottom: '1rem',
-                                    color: textColor,
-                                }}
-                            >
-                                {activePost.title}
-                            </h3>
-                            <div
-                                dangerouslySetInnerHTML={{ __html: activePost.content }}
-                                style={{
-                                    fontSize: '1rem',
-                                    lineHeight: 1.7,
-                                    color: postTextColor,
-                                    fontFamily: "'Inter', sans-serif",
-                                }}
-                            />
-                        </article>
-                    ) : (
-                        <PostList posts={filteredPosts} onSelect={setActivePost} theme={theme} />
-                    )}
+                    {
+                        <PostList posts={filteredPosts} theme={theme} />
+                    }
                 </section>
             </main>
         </>
