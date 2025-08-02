@@ -1,0 +1,1 @@
+Desenvolvimento de uma REST API focada em acesso de dados para bancos de dados relacionais e data lakes.

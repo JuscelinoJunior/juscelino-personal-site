@@ -6,6 +6,6 @@ module.exports = {
     extend: {},
   },
   plugins: [
-      require('@tailwindcss/typography'), // para estilizar posts markdown se quiser
+      require('@tailwindcss/typography'),
     ],
 }

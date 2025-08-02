@@ -32,90 +32,7 @@ type Experience = {
     technologies: string[]
 }
 
-const experiences: Experience[] = [
-    {
-        pt: {
-            company: 'CodeLeap',
-            period: '2025 - Atualmente',
-            description:
-                'CodeLeap é uma software house que desenvolve variados softwares para web e mobile no Reino Unido. Atuo como ' +
-                'desenvolvedor backend em variados projetos e gerenciando também a infraestrutura.',
-        },
-        en: {
-            company: 'CodeLeap',
-            period: '2025 - Current',
-            description:
-                'CodeLeap is a software house that develops various web and mobile software at UK. I work as a backend developer on various projects and also manage the infrastructure.',
-        },
-        technologies: ['Python', 'Django', 'PostgreSQL', 'Redis', 'Firebase', 'AWS']
-    },
-    {
-        pt: {
-            company: 'PagBank',
-            period: '2024 - 2025',
-            description:
-                'Desenvolvimento de sistemas que automatizam processos de conciliação bancária.',
-        },
-        en: {
-            company: 'PagBank',
-            period: '2024 - 2025',
-            description:
-                'Development of systems that automate bank reconciliation processes.',
-        },
-        technologies: ['Python', 'FastAPI', 'Flask', 'PostgreSQL', 'Redis', 'AWS', 'AWS Lambda']
-    },
-    {
-        pt: {
-            company: 'Dafiti',
-            period: '2023 - 2024',
-            description:
-                'Desenvolvimento de soluções tecnológicas para o marketing da loja.',
-        },
-        en: {
-            company: 'Dafiti',
-            period: '2023 - 2024',
-            description:
-                'Development of technological solutions for store marketing.',
-        },
-        technologies: ['Python', 'FastAPI', 'Flask', 'PostgreSQL', 'Redis', 'AWS', 'AWS Lambda']
-    },
-    {
-        pt: {
-            company: 'Dremio (Terceirizado)',
-            period: '2021 - 2022',
-            description:
-                'Atuação como terceirizado para projetos internacionais. Desenvolvimento de um projeto open' +
-                'source chamado Arrow Flight SQL que tinha como objetivo criar um ponto único de acesso' +
-                'para banco de dados SQL. Além disso, atuei como QA no Dremio Arctic que era um projeto' +
-                'para possibilitar a experiência semelhante ao Git para Data Lakes ou outras fontes de dados.',
-        },
-        en: {
-            company: 'Dremio (Outsourced)',
-            period: '2023 - 2024',
-            description:
-                'Acting as an outsourced contractor for international projects. Development of an open source project called Arrow Flight SQL that aimed to create a single point of access for SQL databases. In addition, I worked as QA on Dremio Arctic, which was a project to enable a Git-like experience for Data Lakes or other data sources.',
-        },
-        technologies: ['Java', 'Pyton', 'GCP', 'Open Source Projects']
-    },
-    {
-        pt: {
-            company: 'Simbiose Ventures',
-            period: '2020 - 2022',
-            description:
-                'Development of a REST API focused on data access for relational databases and data lakes.',
-        },
-        en: {
-            company: 'Simbiose Ventures',
-            period: '2023 - 2024',
-            description:
-                'Development of a REST API focused on data access for relational databases and data lakes.',
-        },
-        technologies: ['Python', 'Java', 'MySQL', 'Aerospike', 'Kafka', 'Airflow']
-    },
-]
-
 import React from 'react'
-
 
 function PostList({ posts, onSelect, theme }: { posts: Post[]; onSelect: (post: Post) => void; theme: 'light' | 'dark' }) {
     const textColor = theme === 'light' ? '#4B5563' : '#A1A1AA' // gray-600 light / gray-400 dark
@@ -170,7 +87,7 @@ function PostList({ posts, onSelect, theme }: { posts: Post[]; onSelect: (post: 
     )
 }
 
-export default function Home({ posts }: { posts: Post[] }) {
+export default function Home({ posts, experiences }: { posts: Post[], experiences: Experience[] }) {
     const [lang, setLang] = useState<'pt' | 'en'>('pt')
     const [activePost, setActivePost] = useState<Post | null>(null)
     const [selectedExperience, setSelectedExperience] = useState<ExperienceTranslation | null>(null)
@@ -450,7 +367,10 @@ export default function Home({ posts }: { posts: Post[] }) {
                     >
                         <h3 style={{ marginTop: 0 }}>{selectedExperience.company}</h3>
                         <p style={{ fontStyle: 'italic', color: subTextColor }}>{selectedExperience.period}</p>
-                        <p>{selectedExperience.description}</p>
+                        <div
+                            dangerouslySetInnerHTML={{ __html: selectedExperience.description }}
+                            style={{ fontSize: '1rem', lineHeight: 1.6 }}
+                        />
                         <button
                             onClick={() => setSelectedExperience(null)}
                             style={{
@@ -555,8 +475,61 @@ export async function getStaticProps() {
         })
     )
 
+    // EXPERIENCES
+    const experiencesDirectory = path.join(process.cwd(), 'experiences')
+    const expSlugs = ['codeleap', 'pagbank', 'dafiti', 'dremio', 'simbiose']
+
+    const loadExperienceDescription = async (slug: string, lang: 'pt' | 'en') => {
+        const filePath = path.join(experiencesDirectory, `${slug}.${lang}.md`)
+        const fileContent = fs.readFileSync(filePath, 'utf-8')
+        const processed = await remark().use(html).process(fileContent)
+        return processed.toString()
+    }
+
+    const experiences: Experience[] = await Promise.all(
+        expSlugs.map(async (slug) => {
+            const [ptDesc, enDesc] = await Promise.all([
+                loadExperienceDescription(slug, 'pt'),
+                loadExperienceDescription(slug, 'en')
+            ])
+
+            const techMap: { [key: string]: string[] } = {
+                codeleap: ['Python', 'Django', 'PostgreSQL', 'Redis', 'Firebase', 'AWS'],
+                pagbank: ['Python', 'FastAPI', 'Flask', 'PostgreSQL', 'Redis', 'AWS', 'AWS Lambda'],
+                dafiti: ['Python', 'FastAPI', 'Flask', 'PostgreSQL', 'Redis', 'AWS', 'AWS Lambda'],
+                dremio: ['Java', 'Python', 'GCP', 'Open Source Projects'],
+                simbiose: ['Python', 'Java', 'MySQL', 'Aerospike', 'Kafka', 'Airflow'],
+            }
+
+            const periods: { [key: string]: { pt: string, en: string } } = {
+                codeleap: { pt: '2025 - Atualmente', en: '2025 - Current' },
+                pagbank: { pt: '2024 - 2025', en: '2024 - 2025' },
+                dafiti: { pt: '2023 - 2024', en: '2023 - 2024' },
+                dremio: { pt: '2021 - 2022', en: '2023 - 2024' },
+                simbiose: { pt: '2020 - 2022', en: '2023 - 2024' },
+            }
+
+            return {
+                pt: {
+                    company: capitalize(slug),
+                    period: periods[slug].pt,
+                    description: ptDesc,
+                },
+                en: {
+                    company: capitalize(slug),
+                    period: periods[slug].en,
+                    description: enDesc,
+                },
+                technologies: techMap[slug] || [],
+            }
+        })
+    )
+
     return {
-        props: { posts },
+        props: { posts, experiences },
     }
 }
 
+function capitalize(text: string) {
+    return text.charAt(0).toUpperCase() + text.slice(1)
+}
