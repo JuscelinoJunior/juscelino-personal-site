@@ -9,7 +9,7 @@ import { MdEmail } from "react-icons/md";
 import { FaPython, FaAws, FaJava } from "react-icons/fa";
 import { DiMysql, DiOpensource, DiGoogleCloudPlatform } from "react-icons/di";
 import { IoLogoFirebase } from "react-icons/io5";
-import { SiDjango, SiFlask, SiPostgresql, SiAwslambda, SiRedis, SiFastapi, SiAerospike, SiApachekafka, SiApacheairflow } from "react-icons/si";
+import { SiDjango, SiFlask, SiPostgresql, SiAwslambda, SiAmazondynamodb, SiRedis, SiFastapi, SiAerospike, SiApachekafka, SiApacheairflow } from "react-icons/si";
 import Head from 'next/head'
 import Link from 'next/link'
 
@@ -104,6 +104,7 @@ export default function Home({ posts, experiences }: { posts: Post[], experience
         ['Airflow', <SiApacheairflow />],
         ['AWS', <FaAws />],
         ['AWS Lambda', <SiAwslambda />],
+        ['DynamoDB', <SiAmazondynamodb />]
         ['GCP', <DiGoogleCloudPlatform />],
         ['Firebase', <IoLogoFirebase />],
         ['Open Source Projects', <DiOpensource />]
@@ -465,7 +466,7 @@ export async function getStaticProps() {
             const techMap: { [key: string]: string[] } = {
                 codeleap: ['Python', 'Django', 'PostgreSQL', 'Redis', 'Firebase', 'AWS'],
                 pagbank: ['Python', 'FastAPI', 'Flask', 'PostgreSQL', 'Redis', 'AWS', 'AWS Lambda'],
-                dafiti: ['Python', 'FastAPI', 'Flask', 'PostgreSQL', 'Redis', 'AWS', 'AWS Lambda'],
+                dafiti: ['Python', 'MySQL', 'DynamoDB', 'AWS', 'AWS Lambda'],
                 dremio: ['Java', 'Python', 'GCP', 'Open Source Projects'],
                 simbiose: ['Python', 'Java', 'MySQL', 'Aerospike', 'Kafka', 'Airflow'],
             }
