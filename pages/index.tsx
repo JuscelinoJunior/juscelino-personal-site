@@ -104,7 +104,7 @@ export default function Home({ posts, experiences }: { posts: Post[], experience
         ['Airflow', <SiApacheairflow />],
         ['AWS', <FaAws />],
         ['AWS Lambda', <SiAwslambda />],
-        ['DynamoDB', <SiAmazondynamodb />]
+        ['DynamoDB', <SiAmazondynamodb />],
         ['GCP', <DiGoogleCloudPlatform />],
         ['Firebase', <IoLogoFirebase />],
         ['Open Source Projects', <DiOpensource />]
@@ -292,7 +292,7 @@ export default function Home({ posts, experiences }: { posts: Post[], experience
                             <FaGithub />
                         </a>
                         <a
-                            href="https://youtube.com/@seu-canal"
+                            href="https://www.youtube.com/@ApenasUmDevBrasil"
                             target="_blank"
                             rel="noopener noreferrer"
                             aria-label="YouTube"
